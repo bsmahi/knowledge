@@ -183,18 +183,28 @@ public class Person implements Serializable {
  ## Usage of Annotation in Spring
  
  ```java
- @RestController
+ @RestController                       // Declares this as RestController
  public class UserJPAController {
     
-    @Autowired
+    @Autowired                        // Invoked this repository during at run-time
     private UserRepository userRepository;
  }
- 
-## @RestController 
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by Fernflower decompiler)
-//
+
+
+package org.springframework.beans.factory.annotation;
+
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+@Target({ElementType.CONSTRUCTOR, ElementType.METHOD, ElementType.PARAMETER, ElementType.FIELD, ElementType.ANNOTATION_TYPE})
+@Retention(RetentionPolicy.RUNTIME) // Be called using during run-time
+@Documented
+public @interface Autowired {
+    boolean required() default true;
+}
 
 package org.springframework.web.bind.annotation;
 
