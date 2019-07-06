@@ -156,6 +156,8 @@ These annotations consist of multiple data members/name, value pairs.
 ```
 @TypeHeader(developer = "Mahi Bs", lastModified = "2019-04-14")
 ```
+**@SafeVarargs** - Suppress warnings for all callers of a method or constructor with a generics varargs parameter, since Java 7.
 
+**@FunctionalInterface** - Specifies that the type declaration is intended to be a functional interface, since Java 8.
 
 
