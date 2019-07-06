@@ -81,7 +81,147 @@ Java defines built-in annotations which are from java.lang.annotation package:
   ```
   
 * **@Inherited**:  
+  
+  Marks another annotation to be inherited to subclasses of annotated class (by default annotations are not inherited to         subclasses).
+  
+  A complete example is given below:
+  
+  ```java
+    
+    import java.lang.annotation.Documented;
+    import java.lang.annotation.ElementType;
+    import java.lang.annotation.Inherited;
+    import java.lang.annotation.Retention;
+    import java.lang.annotation.RetentionPolicy;
+    import java.lang.annotation.Target;
+    
+    @Documented
+    @Retention(RetentionPolicy.RUNTIME)
+    @Target({ElementType.TYPE, ElementType.METHOD, ElementType.CONSTRUCTOR, 
+            ElementType.ANNOTATION_TYPE,ElementType.PACKAGE, ElementType.FILED, 
+            ElementType.LOCAL_VARIABLE})
+    @Inherited
+    
+    public @interface TicketDetails {
+         public enum Priority { LOW, MEDIUM, HIGH }
+         String value();
+         String[] changedBy() default "";
+         String[] lastChangeBy() default "";
+         Priority priority() default Priority.MEDIUM;
+         String createdBy() default "Mahendra Rao B";
+         String lastChanged() default "2019-04-14";
+    }
+    
+   
+  ```
+Annotations are often used by frameworks as a way of conveniently applying behaviours to user-defined classes and methods that must otherwise be declared in an external source ( such as an XML configuration file) or programmatically (with API calls). 
+The following, for example, is an annotated JPA data class:
 
+```java
+
+************** @Entity Class *****************
+
+package javax.persistence;
+
+import java.lang.annotation.Target;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Documented;
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
+
+/**
+ * Specifies that the class is an entity. This annotation is applied to the
+ * entity class.
+ * 
+ * @since Java Persistence 1.0
+ */
+@Documented
+@Target(TYPE)
+@Retention(RUNTIME)
+public @interface Entity {
+
+	/**
+	 * (Optional) The entity name. Defaults to the unqualified
+	 * name of the entity class. This name is used to refer to the
+	 * entity in queries. The name must not be a reserved literal
+	 * in the Java Persistence query language.
+	 */
+	String name() default "";
+}
+ 
+
+@Entity                                           // Declares this an entity bean
+@Table(name="person")                             // Maps the bean to SQL table "person" 
+public class Person implements Serializable {
+   @Id                                             // Map this to the primary key column.
+   @GeneratedValue(strategy = GenerationType.AUTO) // Database will generate new primary keys, not us.
+   private Integer id;
+   
+   @Column(length = 14)                            // Truncate column values to 32 characters              
+   private String name;
+   
+   public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+}
+
+```
+
+ ## Usage of Annotation in Spring
+ 
+ ```java
+ @RestController
+ public class UserJPAController {
+    
+    @Autowired
+    private UserRepository userRepository;
+ }
+ 
+## @RestController 
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by Fernflower decompiler)
+//
+
+package org.springframework.web.bind.annotation;
+
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+import org.springframework.core.annotation.AliasFor;
+import org.springframework.stereotype.Controller;
+
+@Target({ElementType.TYPE})
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@Controller
+@ResponseBody
+public @interface RestController {
+    @AliasFor(
+        annotation = Controller.class
+    )
+    String value() default "";
+}
+
+ 
+ ```
+ 
+   
 
 
 
