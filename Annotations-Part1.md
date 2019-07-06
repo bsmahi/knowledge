@@ -6,6 +6,8 @@ associate information with the annotated program element. We will be using annot
 ## Background
 Prior to annotation XML were extensively used for metadata and somehow a particular set of Application Developers and Architects through XML maintenance was getting cumbersome. They were finding something which could be coupled closely with code instead of XML which is very loosely coupled from code. XML configurations were introduced to separate configuration the code. However both have their pros and cons. 
 
+*Suppose, you want to set some application wide constants/parameters. In this scenario, XML would be a better choice because this is not related with any specific piece of code. If you want to expose some method as a service, annotation would be a better choice as it needs to be tightly coupled with that method and developer of the method must be aware of this.*
+
 
 The Java Specifiication Request (JSR-175) introduced the general-purpose annotation (also known as metadata) facility to the Java Community Process in 2002. **Since JDK 1.5, annotations are available in the language**. The **apt(Annotation Processing Tool)** provided a provisional interface for compile-time annotation processing in JDK version 1.5; JSR-269 formalized this, and it became integrated into the javac compiler in version 1.6. *Annotation is special kind of Java construct used to decorate a class, method, field, parameter, variable, constructor, or package*.
 
@@ -75,4 +77,85 @@ Another example is
 
 ```
 I have overriden the toString() method and used @Override annotation in above code. Without having @Override, code works properly without any issue. Basically @Override tells the compiler that this method is an overriden method (metadata about method) and if any such method doesn't exist in base class, then throw a compiler error (method does not override a method from its super class). Now if I would have made a typography mistake and used method name as toStrring() {double r} and if I wouldn’t have used @Override, my code would have compiled and executed successfully but outcome would be different from what I would have accepted.
+
+**Deprecated**
+
+@Decprecated annotation is used for informing compiler that the particular method, class or field is deprecated and it should be generate a warning when someone try to use any of them. 
+
+The Javadoc @deprecated tag should be used when an element has been deprecated. 
+**@deprecated tag is for documentation** and **@Deprecated annotation is for runtime reflection.** 
+@deprecated tag has high priority than @Deprecated annotation when both are together used.
+
+```java
+
+public class TestDeprecated {
+   
+   /* @deprecated 
+    * by speak()
+    */
+    
+    @Deprecated
+    public void speak() {
+       System.out.println("This is method has been Deprecated..");
+    }
+    public static void main(String args[]) 
+    { 
+        TestDeprecated test1 = new TestDeprecated(); 
+        test1.speak(); 
+    } 
+    
+}
+
+```
+**Output**
+```
+This is method has been Deprecated..
+
+```
+**@SuppressWarnings** 
+
+Instructs the compiler to suppress the compile time warnings specified in the annotation parameters. This type of annotation can be applied to any type of declaration.
+
+Java groups warnings under two categories. They are *deprecation and unchecked*.
+Any unchecked warning is generated when a legacy code interfaces with a code that use generics.
+
+```java
+class Test1 {
+
+    @Deprecated
+    public void Display() {
+        System.out.println("Deprecatedtest display()");
+    }
+
+}
+
+
+public class SuppressWarningTest {
+    // If we comment below annotation, program generates 
+    // warning
+    @SuppressWarnings({"checked", "deprecation"})
+    public static void main(String[] args) {
+        Test1 swTest = new Test1();
+        swTest.Display();
+    }
+
+}
+
+```
+**2. Single value Annotations:**
+Single value annotation contain only one member and allow a shorthand form of specifying the value of the member. We only need to specify the value for that member when the annotation is applied and don't need to specify the name of the member. However in order to use this shorthand, the name of the member must be *value*
+
+**For Example**
+```
+ @UnderConstruction("singevalueannotation");
+```
+
+**3. Full Annotations**
+
+These annotations consist of multiple data members/name, value pairs.
+```
+@TypeHeader(developer = "Mahi Bs", lastModified = "2019-04-14")
+```
+
+
 
