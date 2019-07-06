@@ -4,6 +4,9 @@
 associate information with the annotated program element. We will be using annotations extensively in **Java, Spring and Hibernate, Web Service, Testing frameworks** and also in **[Javadoc](https://en.wikipedia.org/wiki/Javadoc)** but many developers fail to understand on how annotations works internally and when it will invoke and available for a programm processing. Let me explain in detail about what is annotation, types of annotations and how they have used in many of the frameworks.
 
 ## Background
+Prior to annotation XML were extensively used for metadata and somehow a particular set of Application Developers and Architects through XML maintenance was getting cumbersome. They were finding something which could be coupled closely with code instead of XML which is very loosely coupled from code. XML configurations were introduced to separate configuration the code. However both have their pros and cons. 
+
+
 The Java Specifiication Request (JSR-175) introduced the general-purpose annotation (also known as metadata) facility to the Java Community Process in 2002. **Since JDK 1.5, annotations are available in the language**. The **apt(Annotation Processing Tool)** provided a provisional interface for compile-time annotation processing in JDK version 1.5; JSR-269 formalized this, and it became integrated into the javac compiler in version 1.6. *Annotation is special kind of Java construct used to decorate a class, method, field, parameter, variable, constructor, or package*.
 
 
@@ -13,10 +16,63 @@ In the Java computer programming language, an annotation is a form of syntactic 
 In simple words, *Annotation is Metadata* Metadata is data about data. So Annotations are metadata for code. 
 Annotations are *meta-meta-objects* which can be used to describe other *meta-objects*. Meta-objects are classes, fields and methods. 
 
+## Usage
 Annotations are used to provide supplement infromation about a program
   1. Annotations start with (@) (@ = AT, as in annotation type).
   2. Annotations do not change action of a compiled program.
   3. Annotations help to associate *metadata* (information) to the program elements i.e., instance variables, constructors,        methods, classes, etc.
   4. Annotations are not pure comments as they can change the way a program is treated by compiler. 
 
+### Types of Annotations
+
+**1. Marker Annotations**
+
+  These annotations contain no members and do not consist any data, will used to mark a declaration. Hence its presence as       an annotation is sufficient. Since, marker interface contains no memebers, simply determining whether it is present or         absent is sufficient.
+ 
+ Examples of marker interfaces are : **@Override, @Deprecated and @SupressWarnings**
+ 
+ **@Override:** Checks that the method is an override. Causes a compilation error if the method is not found in one of the                     base classes or implemented interfaces. This is part of a built-in annotation.
+ **Example**
+ Below example explains the use of the @Override annotation. It instructs the compiler to check parent classes for matching methods. In this case, an error is generated because the gettype() method of class GreenTea doesn't in fact override getType() of class Tea like is desired. If the @Override annotation was absen, a new method of name gettype() would be created in class GreenTea.
+ ```java
+   public class Tea() {
+     
+      public void drink() {
+      
+      }
+      
+      public String getType() {
+           return "Plain Tea";
+      }
+   
+   }
+   
+   public class GreenTea extends Tea {
+    @Override
+    public void drink() { // This is a good override.
+        System.out.println("Let me taste a Green Tea");
+    }
+    
+    @Override
+    public String getType() { 
+        return "Green Tea";
+    }
+
+    @Override
+    public String gettype() { // Compile-time error due to mistyped name.
+        return "Green Tea";
+    }
+}
+ 
+ ```
+Another example is
+
+```java
+ @Override
+ public String toString() {
+   return "Conquest of Paradise of current Object.";
+ }
+
+```
+I have overriden the toString() method and used @Override annotation in above code. Without having @Override, code works properly without any issue. Basically @Override tells the compiler that this method is an overriden method (metadata about method) and if any such method doesn't exist in base class, then throw a compiler error (method does not override a method from its super class). Now if I would have made a typography mistake and used method name as toStrring() {double r} and if I wouldn’t have used @Override, my code would have compiled and executed successfully but outcome would be different from what I would have accepted.
 
