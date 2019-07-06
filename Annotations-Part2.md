@@ -114,8 +114,10 @@ Java defines built-in annotations which are from java.lang.annotation package:
     
    
   ```
+ ## Usage of Annotations in Java Frameworks
+ 
 Annotations are often used by frameworks as a way of conveniently applying behaviours to user-defined classes and methods that must otherwise be declared in an external source ( such as an XML configuration file) or programmatically (with API calls). 
-The following, for example, is an annotated JPA data class:
+The following, for example, is **an annotated JPA data class:**
 
 ```java
 
@@ -228,10 +230,7 @@ public @interface RestController {
     String value() default "";
 }
 
- 
  ```
- 
-   
+We will discuss about Annotation Processor in Part3
 
-
-
+Thank you
