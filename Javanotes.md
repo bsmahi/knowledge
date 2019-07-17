@@ -60,9 +60,10 @@ public class HashMapSortByValue {
          });
 
         /**
-         *  Step3: Iterate both list and hashMap get the sorted value from the list and corresponding key
-         *  by comparing value from list with hashMap value using entry.getValue() and put it in
-         *  sortedMap which will maintain the order.
+         *  Step3: Iterate both list and hashMap get the sorted value from the list 
+         *  and corresponding key by comparing value from list with hashMap value using
+         *  entry.getValue() and put it in sortedMap which will maintain the order.
+         *  
          */
 
         for(String str : list) {
