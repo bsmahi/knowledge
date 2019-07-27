@@ -52,6 +52,7 @@ public class HashMapSortByValue {
          * Step2: Approach1: Sort list elements using comparable or comparator interface in java
          * @return sorted list of elements
          */
+         
          Collections.sort(list, new Comparator<String>() {
              @Override
              public int compare(String str1, String str2) {
@@ -63,12 +64,14 @@ public class HashMapSortByValue {
          * Step2: Approach2: Using Lambda Expressions from Java8
          *  (str1, str2)-> (str1).compareTo(str2)
          */
+         
         Collections.sort(list, (str1, str2) -> (str1).compareTo(str2));
 
         /**
          *  Step2: Approach3: Using Lambda Expressions with Method Reference.
          *  String::compareTo
          */
+         
         Collections.sort(list, String::compareTo); //Lambda can be replaced with method reference.
 
 
