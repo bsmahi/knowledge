@@ -74,7 +74,13 @@ public class HashMapSortByValue {
          
         Collections.sort(list, String::compareTo); //Lambda can be replaced with method reference.
 
+        /**
+         *  Step2: Approach4: Java8 Method Reference in more precise way.
+         *  String::compareTo
+         */
 
+        list.sort(String::compareTo);
+        
         /**
          *  Step3: Iterate both list and hashMap get the sorted value from the list 
          *  and corresponding key by comparing value from list with hashMap value using
