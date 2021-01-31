@@ -1,6 +1,5 @@
 # Spring Boot Framework
-Spring Boot provides a web tool called **[Spring Initializer](http://start.spring.io)** to bootstrap an application quickly. Just go to http://start.spring.io and follow the steps below to generate
-a new spring boot project
+Spring Boot provides a web tool called **[Spring Initializer](http://start.spring.io)** to bootstrap an application quickly. 
 
 @SpringBootApplication which is a combination of the following more specific spring annotations
 
